@@ -391,9 +391,9 @@ fun Grids(){
                     painter = painterResource(id = R.drawable.profile),
                     contentDescription = null,
                     modifier = Modifier
+                        .size(400.dp)
                         .padding(start = 30.dp, top = 30.dp)
-                        .rotate(330f)
-                        .size(height = 100.dp, width = 200.dp),
+                        .rotate(330f),
                     contentScale = ContentScale.FillWidth
                 )
                 Text(
