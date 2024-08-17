@@ -43,7 +43,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.induction.ui.theme.ButtonBlue
 import com.example.induction.ui.theme.TextWhite
-import com.example.induction.ui.theme.screens.HomeScreen
+import com.example.induction.ui.theme.screens.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
 
