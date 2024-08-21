@@ -1,11 +1,13 @@
 package com.example.induction
 
 import SignInScreen
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,6 +30,11 @@ import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,12 +44,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material3.Scaffold
+import com.example.induction.ui.theme.AquaBlue
 import com.example.induction.ui.theme.ButtonBlue
+import com.example.induction.ui.theme.DeepBlue
 import com.example.induction.ui.theme.TextWhite
+import com.example.induction.ui.theme.customDesign.BottomMenuContents
+import com.example.induction.ui.theme.customDesign.BottomNavigationMenu
+import com.example.induction.ui.theme.lightblue
+import com.example.induction.ui.theme.screens.GetStartedScreen
+import com.example.induction.ui.theme.screens.ProfileScreen
+import com.example.induction.ui.theme.screens.SettingsScreen
 import com.example.induction.ui.theme.screens.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
@@ -57,94 +75,47 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun GetStartedScreen(navController: NavController) {
 
-    val gradientBrush = Brush.verticalGradient(
-        colors = listOf(Color.Transparent,Color.Transparent,Color.Transparent,Color.Black.copy(alpha = 0.9f),Color.Black),
-
-    )
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.ceg),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-        
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(
-                    brush = gradientBrush
-                )
-        ){
-            Text(
-                text = "Ready to Explore?",
-                style = MaterialTheme.typography.headlineSmall,
-                color = TextWhite,
-                modifier = Modifier
-                    .padding(top = 540.dp)
-            )
-            Text(
-                text = "Discover, Connect, and thrive into\nCampaus life",
-                style = MaterialTheme.typography.bodySmall,
-                color = TextWhite.copy(alpha = 0.7f),
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .size(height = 70.dp, width = 290.dp)
-                    .padding(top = 10.dp)
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(ButtonBlue)
-                    .clickable {
-                        navController.navigate("signin")
-                    }
-
-            ){
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-
-                    Text(
-                        text = "Get Started",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = TextWhite,
-                        modifier = Modifier.padding(10.dp)
-
-                    )
-                    Icon(
-                        imageVector = Icons.Default.ArrowForward,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(24.dp)
-
-                    )
-                }
-            }
-        }
-
-    }
-}
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun NavigationGraph() {
     val navController = rememberNavController()
+    val bottomMenuItems = listOf(
+        BottomMenuContents("Profile", R.drawable.baseline_home_filled_24),
+        BottomMenuContents("Home", R.drawable.baseline_home_filled_24),
+        BottomMenuContents("Settings", R.drawable.baseline_home_filled_24)
+    )
 
-    NavHost(navController = navController, startDestination = "home") {
-        composable("getstarted") { GetStartedScreen(navController) }
-        composable("signin") { SignInScreen(navController) }
-        composable("home"){ HomeScreen(navController) }
+    Scaffold(
+        bottomBar = {
+            BottomNavigationMenu(
+                items = bottomMenuItems,
+                navController = navController
+            )
+        }
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.fillMaxSize()  // Removed innerPadding and replaced with fillMaxSize
+        ) {
+            composable("getstarted") { GetStartedScreen(navController) }
+            composable("signin") { SignInScreen(navController) }
+            composable("home") { HomeScreen(navController) }
+            composable("profile") { ProfileScreen(navController) }
+            composable("settings") { SettingsScreen(navController) }
+        }
     }
 }
+
+fun NavController.navigateAndClearStack(route: String) {
+    this.navigate(route) {
+        popUpTo(this@navigateAndClearStack.graph.startDestinationId) {
+            inclusive = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+
