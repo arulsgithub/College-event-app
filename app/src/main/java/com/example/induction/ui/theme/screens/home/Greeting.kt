@@ -57,7 +57,7 @@ fun Greeting(
                 modifier = Modifier.padding()
             )
             Text(
-                text = name,
+                text = "Smrithi",
                 color = Color.Black,
                 style = MaterialTheme.typography.bodySmall
             )
