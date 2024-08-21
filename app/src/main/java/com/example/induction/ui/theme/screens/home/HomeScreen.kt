@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -33,6 +34,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.induction.R
 import com.example.induction.ui.theme.DarkGreen
 import com.example.induction.ui.theme.TextWhite
@@ -40,25 +43,30 @@ import com.example.induction.ui.theme.lightblue
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+
+    Box(modifier = Modifier.fillMaxSize()) {
+
         Image(
-            painter = painterResource(id = R.drawable.bgfull),
+            painter = painterResource(id = R.drawable.bg),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize(),
             contentScale = ContentScale.Crop
         )
 
-        Column(
-            modifier = Modifier
-                .padding(top = 30.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Greeting();
-            ChipSection(chip = listOf("Chip1", "Chip2", "Chip3", "Chip4"))
-            Grids()
+            item {
+                Column(
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                ) {
+                    Greeting();
+                    ChipSection(chip = listOf("Chip1", "Chip2", "Chip3", "Chip4"))
+                    Grids()
+                }
+            }
         }
     }
 }

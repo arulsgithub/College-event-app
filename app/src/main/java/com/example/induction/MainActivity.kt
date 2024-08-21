@@ -75,7 +75,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun NavigationGraph() {
@@ -83,7 +82,7 @@ fun NavigationGraph() {
     val bottomMenuItems = listOf(
         BottomMenuContents("Profile", R.drawable.baseline_home_filled_24),
         BottomMenuContents("Home", R.drawable.baseline_home_filled_24),
-        BottomMenuContents("Settings", R.drawable.baseline_home_filled_24)
+        BottomMenuContents("Settings", R.drawable.baseline_settings_24)
     )
 
     Scaffold(

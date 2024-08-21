@@ -71,5 +71,6 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.androidx.material)
     implementation(libs.exoplayer)
+    implementation( libs.lottie.compose)
 
 }

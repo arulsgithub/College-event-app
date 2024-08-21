@@ -45,9 +45,9 @@ fun ChipSection(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(height = 170.dp, width = 280.dp)
+                    .size(height = 160.dp, width = 280.dp)
 
-                    .padding(start = 10.dp, top = 10.dp, bottom = 10.dp)
+                    .padding(start = 10.dp, top = 1.dp, bottom = 10.dp)
                     .clickable {
                         selectedChipIndex = it
                     }
