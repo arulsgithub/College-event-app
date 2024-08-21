@@ -134,7 +134,6 @@ fun Grids(){
                                     .clip(RoundedCornerShape(15.dp))
                                     .background(lightblue)
                             ) {
-                                Column {
                                     Text(
                                         text = "FAQs",
                                         style = MaterialTheme.typography.bodyLarge,
@@ -147,9 +146,15 @@ fun Grids(){
                                         style = MaterialTheme.typography.bodySmall,
                                         fontWeight = FontWeight.Light,
                                         modifier = Modifier
-                                            .padding(start = 10.dp, bottom = 10.dp)
+                                            .padding(start = 10.dp, top = 20.dp)
                                     )
-                                }
+                                Image(
+                                    painter = painterResource(id = R.drawable.faq),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .size(500.dp)
+                                        .padding(top = 50.dp, start = 30.dp)
+                                )
                             }
                         }
                     }
@@ -159,7 +164,7 @@ fun Grids(){
                             .clip(RoundedCornerShape(15.dp))
                             .background(lightblue)
                     ){
-                        Column {
+
                             Text(
                                 text = "Help",
                                 style = MaterialTheme.typography.bodyLarge,
@@ -172,9 +177,16 @@ fun Grids(){
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = FontWeight.Light,
                                 modifier = Modifier
-                                    .padding(start = 10.dp, bottom = 10.dp)
+                                    .padding(start = 10.dp, top = 20.dp)
                             )
-                        }
+                        Image(
+                            painter = painterResource(id = R.drawable.help),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(500.dp)
+                                .padding(top = 50.dp, start = 30.dp)
+                        )
+
                     }
                 }
             }

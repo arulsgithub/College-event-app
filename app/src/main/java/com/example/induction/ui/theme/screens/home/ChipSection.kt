@@ -37,9 +37,7 @@ fun ChipSection(
         mutableIntStateOf(0)
     }
 
-    LazyRow(
-
-    ) {
+    LazyRow{
         items(chip.size){
 
             Box(

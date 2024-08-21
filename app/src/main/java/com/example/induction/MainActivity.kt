@@ -80,9 +80,12 @@ class MainActivity : ComponentActivity() {
 fun NavigationGraph() {
     val navController = rememberNavController()
     val bottomMenuItems = listOf(
-        BottomMenuContents("Profile", R.drawable.baseline_home_filled_24),
+        BottomMenuContents("Events", R.drawable.conference),
+        BottomMenuContents("Schedule", R.drawable.baseline_calendar_month_24),
         BottomMenuContents("Home", R.drawable.baseline_home_filled_24),
-        BottomMenuContents("Settings", R.drawable.baseline_settings_24)
+        BottomMenuContents("Settings", R.drawable.baseline_settings_24),
+        BottomMenuContents("Profile", R.drawable.profile_ic)
+
     )
 
     Scaffold(
