@@ -79,6 +79,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun NavigationGraph() {
     val navController = rememberNavController()
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = backStackEntry?.destination?.route
+
     val bottomMenuItems = listOf(
         BottomMenuContents("Events", R.drawable.conference),
         BottomMenuContents("Schedule", R.drawable.baseline_calendar_month_24),
@@ -88,18 +91,22 @@ fun NavigationGraph() {
 
     )
 
+    val routesWithBottomNav = listOf("Events", "Schedule", "home", "profile", "settings")
+
     Scaffold(
         bottomBar = {
-            BottomNavigationMenu(
-                items = bottomMenuItems,
-                navController = navController
-            )
+            if (currentRoute in routesWithBottomNav) {
+                BottomNavigationMenu(
+                    items = bottomMenuItems,
+                    navController = navController
+                )
+            }
         }
     ) {
         NavHost(
             navController = navController,
-            startDestination = "home",
-            modifier = Modifier.fillMaxSize()  // Removed innerPadding and replaced with fillMaxSize
+            startDestination = "getstarted",
+            modifier = Modifier.fillMaxSize()
         ) {
             composable("getstarted") { GetStartedScreen(navController) }
             composable("signin") { SignInScreen(navController) }

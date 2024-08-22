@@ -2,6 +2,7 @@ package com.example.induction.ui.theme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -61,10 +62,10 @@ fun ProfileScreen(navController: NavController) {
         ) {
             item {
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(200.dp),
+                    horizontalArrangement = Arrangement.spacedBy(170.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .padding(start = 20.dp, end = 20.dp)
+                        .padding(start = 30.dp, end = 30.dp)
                         .padding(top = 50.dp)
                 ) {
                     Text(
@@ -78,7 +79,7 @@ fun ProfileScreen(navController: NavController) {
                         modifier = Modifier.size(60.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(50.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Box(
                     modifier = Modifier
@@ -261,6 +262,25 @@ fun ProfileScreen(navController: NavController) {
                             }
                         }
                     }
+                }
+            }
+            item{
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(55.dp)
+                        .padding(top = 10.dp, start = 30.dp, end = 30.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(Color(0xff46a8e9))
+                        .clickable {  }
+                ){
+                    Text(
+                        text = "Logout",
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.ExtraBold
+                    )
                 }
             }
         }

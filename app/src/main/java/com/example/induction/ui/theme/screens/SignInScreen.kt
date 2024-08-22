@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.induction.R
 import com.example.induction.ui.theme.AquaBlue
@@ -47,12 +48,12 @@ fun SignInScreen(navController: NavController) {
         Image(
             painter = painterResource(id = R.drawable.bg),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
+                .zIndex(-1f),
             contentScale = ContentScale.Crop
         )
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(top = 100.dp)
         ) {
             item {
@@ -125,7 +126,7 @@ fun SignInScreen(navController: NavController) {
                         },
                         leadingIcon = {
                             Icon(
-                                painter = painterResource(id = R.drawable.user),
+                                painter = painterResource(id = R.drawable.profile_ic),
                                 contentDescription = null,
                                 modifier = Modifier.size(25.dp)
                             )
